@@ -99,6 +99,10 @@ class MyCustomModule::DeviseAuthyController < Devise::DeviseAuthyController
       my_own_path
     end
 
+    def after_authy_disabled_path_for(resource)
+      my_own_path
+    end
+
     def invalid_resource_path
       my_own_path
     end
@@ -118,6 +122,18 @@ The install generator also copy a `Devise Authy` i18n file which you can find at
 
     config/locales/devise.authy.en.yml
 
+## Session variables
+
+If you want to know if the user is signed in using Two-Factor authentication,
+you can use the following session variable:
+
+```ruby
+session["#{resource_name}_authy_token_checked"]
+
+# Eg.
+session["user_authy_token_checked"]
+```
+
 
 ## Running Tests
 
@@ -135,5 +151,5 @@ $ bundle exec rspec spec/
 
 ## Copyright
 
-Copyright (c) 2014 Authy Inc. See LICENSE.txt for
+Copyright (c) 2012-2020 Authy Inc. See LICENSE.txt for
 further details.
